@@ -12,7 +12,7 @@ if [ "${should_do}" = "yes" ]; then
   file_to_append_to=".bashrc"
   line='for file in ${HOME}/bash_customisation_startup_scripts/{colours,prompt,go}.sh; do [ -r "${file}" ] && source "${file}"; done'
 
-  if ! $(grep -Hlr "colours,prompt" ${HOME}/${file_to_append_to} > /dev/null); then
+  if ! $(grep -Hlr "colours,prompt,go" ${HOME}/${file_to_append_to} > /dev/null); then
     echo "Adding bash customisation line to ${file_to_append_to}"
     echo "${line}" >> ${HOME}/${file_to_append_to}
   fi
