@@ -42,6 +42,7 @@ if ! command -v go > /dev/null; then
         ln -s /usr/local/go/bin/go ${HOME}/.local/bin/go
       fi
     fi
+
   fi
 fi
 

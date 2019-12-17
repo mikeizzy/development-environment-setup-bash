@@ -10,7 +10,7 @@ printf "%b\n" "${PURPLE}[PROMPT]${RESET} Configure bash customisation? (${LIGHT_
 read -r should_do
 if [ "${should_do}" = "yes" ]; then
   file_to_append_to=".bashrc"
-  line='for file in ${HOME}/bash_customisation_startup_scripts/{colours,prompt}.sh; do [ -r "${file}" ] && source "${file}"; done'
+  line='for file in ${HOME}/bash_customisation_startup_scripts/{colours,prompt,go}.sh; do [ -r "${file}" ] && source "${file}"; done'
 
   if ! $(grep -Hlr "colours,prompt" ${HOME}/${file_to_append_to} > /dev/null); then
     echo "Adding bash customisation line to ${file_to_append_to}"
