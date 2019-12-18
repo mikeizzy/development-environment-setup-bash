@@ -11,12 +11,12 @@ set -o pipefail
 if ! command -v go > /dev/null; then
   printf "%b\n" "${PURPLE}[PROMPT]${RESET} Do you want to install Go? (${LIGHT_GREEN}yes${RESET})"
   read -r should_do
+
+  # From recommendation documented at:
+  # https://github.com/golang/go/wiki/Ubuntu
+
   if [ "${should_do}" = "yes" ]; then
-    if command -v snap; then
-      # From recommendation documented at:
-      # https://github.com/golang/go/wiki/Ubuntu
-      sudo snap install go
-    else
+    if ! sudo snap install go; then
 
       #########################################################################
       # Dependencies
