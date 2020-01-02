@@ -5,6 +5,9 @@
 # Shamelessly copied from https://github.com/gf3/dotfiles
 # Screenshot: http://i.imgur.com/s0Blh.png
 
+GRAY="$(tput setaf 244)"
+echo -e "${GRAY}Running ${BASH_SOURCE}"
+
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
   export TERM=gnome-256color
 elif infocmp xterm-256color >/dev/null 2>&1; then
@@ -44,9 +47,6 @@ else
   BOLD=""
   RESET="\033[m"
 fi
-
-GRAY="$(tput setaf 244)"
-echo -e "${GRAY}Running ${BASH_SOURCE}"
 
 export MAGENTA
 export ORANGE

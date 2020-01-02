@@ -1,7 +1,7 @@
 #!/bin/bash
+
 ###############################################################################
 
-GRAY="$(tput setaf 244)"
 echo -e "${GRAY}Running ${BASH_SOURCE}"
 
 function parse_git_dirty() {

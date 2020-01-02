@@ -11,7 +11,7 @@ source ./bash_customisation_startup_scripts/colours.sh
 
 number_of_errors=0
 
-for bin in bash echo printf
+for bin in bash echo printf pwd
 do
   if ! command -v ${bin} > /dev/null; then
     echo "${MAGENTA}Dependency ${GREEN}'${bin}'${MAGENTA} not on your path. You are using ${WHITE}${SHELL}${MAGENTA}. ${GREEN}'${bin}'${MAGENTA} needs to be available.${RESET}"
