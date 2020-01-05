@@ -4,6 +4,11 @@
 
 echo -e "${GRAY}Running ${BASH_SOURCE}"
 
+if [[ $SHELL == *"zsh"* ]]; then
+  # zsh already highlights git directories
+  return
+fi
+
 function parse_git_dirty() {
   [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
 }

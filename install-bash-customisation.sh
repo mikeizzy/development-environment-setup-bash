@@ -13,7 +13,7 @@ if [ "${should_do}" = "yes" ]; then
   echo "Copying from $(pwd)/bash_customisation_startup_scripts to ${HOME}/"
   cp -R ./bash_customisation_startup_scripts ${HOME}/
 
-  for file_to_append_to in .bashrc .bash_profile; do
+  for file_to_append_to in .bashrc .bash_profile .zshrc; do
     line='for file in ${HOME}/bash_customisation_startup_scripts/{colours,prompt,go}.sh; do [ -r "${file}" ] && source "${file}"; done'
 
     if ! $(grep -Hlr "colours,prompt,go" ${HOME}/${file_to_append_to} > /dev/null); then
