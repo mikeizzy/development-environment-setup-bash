@@ -1,0 +1,5 @@
+Docker is officially supported in Windows 10 only via Windows 10 Pro/Enterprise and Docker Desktop.
+
+However, it is possible to install Docker Community edition using apt in WSL. To do so run:
+
+sudo apt install docker-ce docker-ce-cli docker-compose
