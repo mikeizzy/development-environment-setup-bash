@@ -13,10 +13,12 @@ if [ "${should_do}" = "yes" ]; then
   echo "Copying from $(pwd)/bash_customisation_startup_scripts to ${HOME}/"
   cp -R ./bash_customisation_startup_scripts ${HOME}/
 
-  for file_to_append_to in .bashrc .bash_profile .zshrc; do
-    line='for file in ${HOME}/bash_customisation_startup_scripts/{colours,prompt,go}.sh; do [ -r "${file}" ] && source "${file}"; done'
+  STRING_MATCH="colours,prompt,go"
 
-    if ! $(grep -Hlr "colours,prompt,go" ${HOME}/${file_to_append_to} > /dev/null); then
+  for file_to_append_to in .bashrc .bash_profile .zshrc; do
+    line='; mkdir -p ${HOME}/.local/bin; export PATH="${PATH}:${HOME}/.local/bin"; for file in ${HOME}/bash_customisation_startup_scripts/{'"${STRING_MATCH}"'}.sh; do [ -r "${file}" ] && source "${file}"; done;'
+
+    if ! $(grep -Hlr "${STRING_MATCH}" ${HOME}/${file_to_append_to} > /dev/null); then
       echo "Adding bash customisation line to ${file_to_append_to}"
       echo "${line}" >> ${HOME}/${file_to_append_to}
     fi

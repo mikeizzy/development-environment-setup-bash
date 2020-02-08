@@ -33,13 +33,36 @@ if ! command -v go > /dev/null; then
       if [ ${number_of_errors} -gt 0 ]; then
         echo "${MAGENTA}${number_of_errors} required dependencies not in path.${RESET}"
       else
-        printf "%b\n" "${PURPLE}[PROMPT]${RESET} Please provide the URL where the Go tar.gz file will be downloaded from:"
-        read -r go_url
-        echo "Downloading Go package from ${go_url} to /tmp"
-        wget "${go_url}" -P /tmp
-        tar -C /usr/local -xzf "$(sudo find /tmp -type f -name 'go*.tar.gz')"
+        URL=""
+        while [[ "${URL}" != *".tar.gz" ]]; do
+          printf "%b\n" "${PURPLE}[PROMPT]${RESET} Please provide the URL where the Go tar.gz file will be downloaded from:"
+          read -r go_url
+          if [[ ${go_url} != *".tar.gz" ]]; then
+            echo "The URL needs to refer to a *.tar.gz file"
+          else
+            URL="${go_url}"
+          fi
+        done
+
+        # Check if the tar is already in /tmp
+        filepath="$( echo -n "${go_url}" | rev | cut -d '/' -f 1 | rev )"
+        echo "Seeing if file exists in /tmp/${filepath}"
+
+        if ! [ -f "/tmp/${filepath}" ]; then
+          echo "Downloading Go package from ${go_url} to /tmp"
+          wget "${go_url}" -P /tmp
+          echo "Finished downloading Go"
+        else
+          file "/tmp/${filepath}"
+          echo "File exists"
+        fi
+
+        sudo tar -C /usr/local -xzf "$(find /tmp/* -type f -name 'go*.tar.gz')"
+        echo "Finished unzipping to /usr/local/go"
         # Create symlink in ~/.local/bin to the go bin
+        mkdir -p ${HOME}/.local/bin
         ln -s /usr/local/go/bin/go ${HOME}/.local/bin/go
+        file /usr/local/go/bin/go
       fi
     fi
 
