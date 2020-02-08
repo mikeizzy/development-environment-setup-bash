@@ -6,7 +6,7 @@
 # Screenshot: http://i.imgur.com/s0Blh.png
 
 GRAY="$(tput setaf 244)"
-echo -e "${GRAY}Running ${BASH_SOURCE}"
+echo -e "${GRAY}Running ${BASH_SOURCE[0]:-${(%):-%x}}"
 
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
   export TERM=gnome-256color

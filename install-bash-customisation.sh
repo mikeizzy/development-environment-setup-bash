@@ -21,7 +21,10 @@ if [ "${should_do}" = "yes" ]; then
       echo "${line}" >> ${HOME}/${file_to_append_to}
     fi
 
-    source ${HOME}/${file_to_append_to}
+    THIS_SHELL=$( printf ${SHELL} | cut -d '/' -f 3 )
+    if [[ "${file_to_append_to}" == *"${THIS_SHELL}"* ]]; then
+      source ${HOME}/${file_to_append_to}
+    fi
   done
 fi
 

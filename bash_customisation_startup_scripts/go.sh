@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e "${GRAY}Running ${BASH_SOURCE}"
+echo -e "${GRAY}Running ${BASH_SOURCE[0]:-${(%):-%x}}"
 
 ###############################################################################
 # Set GOPATH and path

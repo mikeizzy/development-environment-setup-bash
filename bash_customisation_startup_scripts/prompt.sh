@@ -2,7 +2,7 @@
 
 ###############################################################################
 
-echo -e "${GRAY}Running ${BASH_SOURCE}"
+echo -e "${GRAY}Running ${BASH_SOURCE[0]:-${(%):-%x}}"
 
 if [[ $SHELL == *"zsh"* ]]; then
   # zsh already highlights git directories
